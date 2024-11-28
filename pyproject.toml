@@ -1,0 +1,20 @@
+[project]
+name = "quell"
+version = "0.1.0"
+description = "quell using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.83.0,<1.0.0"
+]
+
+[project.scripts]
+quell = "quell.main:run"
+run_crew = "quell.main:run"
+train = "quell.main:train"
+replay = "quell.main:replay"
+test = "quell.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
