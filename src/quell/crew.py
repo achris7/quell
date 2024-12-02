@@ -1,4 +1,89 @@
 from crewai import Agent, Crew, Process, Task
+from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import SeleniumScrapingTool
+
+@CrewBase
+class ComplianceQaAutomationAndDocumentationCrew():
+    """ComplianceQaAutomationAndDocumentation crew"""
+
+    @agent
+    def web_app_test_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config['web_app_test_specialist'],
+            
+        )
+
+    @agent
+    def mobile_app_test_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config['mobile_app_test_specialist'],
+            
+        )
+
+    @agent
+    def documentation_expert(self) -> Agent:
+        return Agent(
+            config=self.agents_config['documentation_expert'],
+            
+        )
+
+    @agent
+    def summary_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['summary_analyst'],
+            
+        )
+
+
+    @task
+    def execute_web_app_test_cases(self) -> Task:
+        return Task(
+            config=self.tasks_config['execute_web_app_test_cases'],
+            tools=[SeleniumScrapingTool()],
+        )
+
+    @task
+    def capture_web_app_documentation(self) -> Task:
+        return Task(
+            config=self.tasks_config['capture_web_app_documentation'],
+            
+        )
+
+    @task
+    def execute_mobile_app_test_cases(self) -> Task:
+        return Task(
+            config=self.tasks_config['execute_mobile_app_test_cases'],
+            
+        )
+
+    @task
+    def capture_mobile_app_documentation(self) -> Task:
+        return Task(
+            config=self.tasks_config['capture_mobile_app_documentation'],
+            
+        )
+
+    @task
+    def summarize_results(self) -> Task:
+        return Task(
+            config=self.tasks_config['summarize_results'],
+      
+        )
+
+
+    @crew
+    def crew(self) -> Crew:
+        """Creates the ComplianceQaAutomationAndDocumentation crew"""
+        return Crew(
+            agents=self.agents, # Automatically created by the @agent decorator
+            tasks=self.tasks, # Automatically created by the @task decorator
+            process=Process.sequential,
+            verbose=True,
+        )
+
+
+
+from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task, before_kickoff, after_kickoff
 from crewai_tools import MultiOnTool
 

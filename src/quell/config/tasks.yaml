@@ -1,3 +1,51 @@
+---
+execute_web_app_test_cases:
+  description: Execute the {test_cases} on the {web_app_url} using the SeleniumScrapingTool,
+    ensuring compliance with {compliance_requirements}. Capture documentation in the
+    form of {documentation_format}.
+  expected_output: A detailed report of the test execution for the web application,
+    including compliance checks and documentation in the chosen format.
+  async_execution: false
+  agent:
+  
+capture_web_app_documentation:
+  description: Capture {documentation_format} during the execution of web app test
+    cases on {web_app_url}.
+  expected_output: Documentation in the chosen format capturing the web app testing
+    process.
+  async_execution: false
+  agent:
+
+execute_mobile_app_test_cases:
+  description: Execute the {test_cases} on the {mobile_app_access}, ensuring compliance
+    with {compliance_requirements}. Capture documentation in the form of {documentation_format}.
+  expected_output: A detailed report of the test execution for the mobile application,
+    including compliance checks and documentation in the chosen format.
+  async_execution: false
+  agent:
+
+capture_mobile_app_documentation:
+  description: Capture {documentation_format} during the execution of mobile app test
+    cases on {mobile_app_access}.
+  expected_output: Documentation in the chosen format capturing the mobile app testing
+    process.
+  async_execution: false
+  agent:
+
+summarize_results:
+  description: Compile a summary of the test results and compliance checks from both
+    web and mobile app testing.
+  expected_output: A comprehensive report summarizing the compliance and testing results
+    for both web and mobile applications.
+  async_execution: false
+  agent:
+  context:
+  - execute_web_app_test_cases
+  - capture_web_app_documentation
+  - execute_mobile_app_test_cases
+  - capture_mobile_app_documentation
+
+
 research_task:
   description: >
     Conduct a thorough research about {topic}
